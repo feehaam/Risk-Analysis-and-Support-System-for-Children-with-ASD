@@ -1,0 +1,116 @@
+
+
+\begin{table}[!htbp]
+    \caption{MQ135 Pin diagram}
+    \label{table:gas}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+        \hline
+         \textbf{MQ135(gas, smoke)} & \textbf{Arduino pin}   \\
+        \hline
+        VCC &5V \\
+        \hline
+        GND & GND \\
+        \hline
+        A0 & A0 \\
+        \hline
+        D0& 2 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{table}
+    \vspace{-2mm}%
+
+\begin{table}[!htbp]
+    \caption{MPU6050 pin diagram}
+    \label{table:acceleration}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+        \hline
+         \textbf{MPU6050(Acceleration) } & \textbf{Arduino pin}   \\
+        \hline
+        VCC &5V \\
+        \hline
+        GND & GND \\
+        \hline
+        SCL & A5 \\
+        \hline
+        SDA& A4 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{table}
+    \vspace{-2mm}%
+
+
+\begin{table}[!htbp]
+    \caption{MAX30102 pin diagram}
+    \label{table:heart}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+        \hline
+         \textbf{MAX30102(Heart rate)} & \textbf{Arduino pin}   \\
+        \hline
+        VCC &5V \\
+        \hline
+        GND & GND \\
+        \hline
+        A0 & A0 \\
+        \hline
+        D0& 2 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{table}
+    \vspace{-2mm}%
+
+
+\begin{table}[!htbp]
+    \caption{BMP180(temperature, altitude, pressure) pin diagram}
+    \label{table:bmp}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+        \hline
+         \textbf{BMP180} & \textbf{Arduino pin}   \\
+        \hline
+        VCC & 5V\\
+        \hline
+        GND & GND \\
+        \hline
+        A0 & A5 \\
+        \hline
+        D0& A4 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{table}
+    \vspace{-2mm}%
+
+
+\begin{table}[!htbp]
+    \caption{SIM800L pin diagram}
+    \label{table:gsm}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+        \hline
+         \textbf{GSM Module} & \textbf{Arduino pin}   \\
+        \hline
+        VCC & \\
+        \hline
+        GND & GND \\
+        \hline
+        RX & 10 \\
+        \hline
+         TX & 11 \\
+        \hline
+        \end{tabular}
+        \end{center}
+    \end{table}
+    \begin{figure}[htbp]
+        \centerline{
+            \includegraphics[width=1\linewidth]{hardware_implementation.jpg}
+        }
+        \caption{Implemented system}
+        \label{fig:implementation}
+    \end{figure}
+    \vspace{8mm}%
