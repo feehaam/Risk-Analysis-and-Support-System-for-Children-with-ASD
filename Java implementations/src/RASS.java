@@ -1,5 +1,5 @@
 
-import java.util.Random;
+import java.util.*;
 
 public class RASS {
     
@@ -93,10 +93,10 @@ public class RASS {
     public static void main(String[] args) {
         Random r = new Random();
         RASS algo = new RASS();
-        String file = FFiles.read("C:\\Users\\User\\OneDrive\\Desktop\\Thesis Data\\Sensor data 2.txt");
+        String file = FFiles.read("C:\\Users\\User\\OneDrive\\Desktop\\Thesis Data\\Sensor data 1.txt");
         String row[] = file.split("\n");
         
-        for(int i=0; i<100; i++){
+        for(int i=0; i<row.length; i++){
             row[i] = row[i].replace("\t", " ");
             String[] values = row[i].split(" ");
             
@@ -115,18 +115,11 @@ public class RASS {
                 if(j==11) algo.gyroVal = Double.parseDouble(values[j]);
                 if(j==12) algo.anguVal = Double.parseDouble(values[j]);
             }
-            double dif = 2;
-            dif = r.nextInt(1000)+1000;
-            dif /= 2000;
-            dif -= 1;
-            algo.altiVal += dif;
-            algo.presVal += dif * 12.13;
-            System.out.println(((int)algo.presVal)+"\t"+String.format("%.1f",algo.altiVal));
-//            algo.tempVal = (algo.tempVal1 + algo.tempVal2) / 2;
-//            algo.updateValues();
-////            algo.printQueus();
-//            algo.riskAnalysis();
-//            algo.readingNumber++;
+            
+            algo.updateValues();
+//            algo.printQueus();
+            algo.riskAnalysis();
+            algo.readingNumber++;
         }
     }
     
@@ -441,9 +434,8 @@ public class RASS {
         //a) If acceleration high, Got into fire, trying to escape
         //b) If acceleration low, Got into fire, body not moving.
         //If gas toxicity > 400, Entering a harmful or polluted location
-        if(Math.abs(getVal(l1TempQ, l1e) - getVal(l2TempQ, l2e)) >= 3){
+        if(Math.abs(getVal(l1TempQ, l1e) - getVal(l2TempQ, l2e)) >= 4){
             risk("Got into high temperature");
-            
             if(l1AccA - getVal(l2AccQ, l2e - 1) >= .4){
                 risk("Entering a fire and attempting to escape");
             }
@@ -454,7 +446,7 @@ public class RASS {
         if(gasVal > 400) {
             risk("Got into very harmful location!");
         }
-        else if(l1GasA - l2GasQ[l2e-1] > 30){
+        else if(l1GasA - getVal(l2GasQ, l2e - 1) > 30){
             risk("Entering a harmful or polluted location!");
         }
         
@@ -462,19 +454,19 @@ public class RASS {
         //a) If altitude decreases than 10 sec average, Fall into hole.
         //b) If temperature decreases than 10 sec average, Drawn into water.
         //c) If altitude doen't change than 10 sec average, Got into high pressure environment
-        if (Math.abs(l1PresA - getVal(l2PresQ, l2e-1)) > 12.5) {
-            risk("High change in pressure");
+        if (Math.abs(l1PresA - getVal(l2PresQ, l2e-1)) > 24) {
+            risk("High change in pressure.");
             //Pressure changes around 12pa by chane of 1m in altitude from sea level.
             //Higher we go, it decreases, Lower we go, it increases. 
-            if (Math.abs((l1TempA - getVal(l2TempQ, l2e))) > 1.5) {
-                risk("Drawn into water.");
-            }
-            else if (Math.abs((l1AltiA - getVal(l2AltiQ, l2e))) > 1.5) {
+            if (Math.abs((l1AltiA - getVal(l2AltiQ, l2e))) > 1.5) {
                 risk("Fallen into hole.");
             }
-            else if (Math.abs((l1AltiA - getVal(l2AltiQ, l2e))) < 1) {
-                risk("Got into high pressure environment.");
-            }
+        }
+        if (Math.abs((l1TempA - getVal(l2TempQ, l2e))) > 1) {
+            System.out.println("Watering...");
+            System.out.println(getVal(l2AltiQ, l2e)+" vs "+l1AltiA);
+            if(getVal(l2AltiQ, l2e) - l1AltiA > 1.5)
+                risk("Drawn into water.");
         }
         //If high change in altitude,
         //a) If pressure high, Drawn into water.
@@ -701,7 +693,19 @@ public class RASS {
         return Q[index];
     }
     
+    Set<String> riskList = new HashSet<String>();
     void risk(String msg) {
         System.out.println("Risk: "+msg+" @reading #"+readingNumber);
+        if(!riskList.contains(msg)){
+              risks += "[>] "+msg+" @reading #"+readingNumber+"\n";
+              riskList.add(msg);
+        }
+    }
+    
+    String risks = "";
+    public String getRisks(){
+          String temp = risks;
+          risks = "";
+          return temp;
     }
 }
