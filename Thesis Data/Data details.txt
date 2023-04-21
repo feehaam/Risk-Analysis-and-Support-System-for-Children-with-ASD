@@ -1,0 +1,17 @@
+Sensor data 1: Taken at 
+	- nearly 27 degree C
+	- from around 40m altitude (10th floor)
+	- Idle seating (low acceleration)
+	- Heart rate of mid age men
+
+Sensor data 2: Taken at
+	- nearly 30 degree C
+	- from around 14m altitude (ground)
+	- walking (mid acceleration)
+	- Heart rate of mid age men
+
+Sensor data 3: Taken at
+	- nearly 30 degree C (Incremented by 10 degree for illustration)
+	- from around 15m altitude (ground)
+	- from bus (mid-high acceleration)
+	- Heart rate of mid age women
